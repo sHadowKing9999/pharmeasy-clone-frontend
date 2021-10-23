@@ -2,7 +2,6 @@ import Banner from "../component/Banner/Banner";
 import Header from "../component/Header/Header";
 import ProductFeed from "../component/ProductFeed/ProductFeed";
 import React from "react";
-
 function Home() {
   return (
     <>

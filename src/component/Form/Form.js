@@ -38,7 +38,7 @@ function Form() {
         />
       </div>
     );
-  else if (token.token != null) {
+  else if (token != null) {
     return (
       <div className="flex-col w-3/5 md:1/2 lg:1/3 space-y-10 mx-auto p-6 bg-white rounded-md shadow-md">
         <div className="flex w-full justify-center items-center">

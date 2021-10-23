@@ -17,6 +17,8 @@ function loginReducer(
       };
     case "LOGIN_FAILED":
       return { ...state, error: action.payload, isLoading: false };
+    case "FETCH_CART_FAILED":
+      return { ...state, token: null };
     default:
       return state;
   }

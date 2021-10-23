@@ -1,19 +1,47 @@
 import { StarIcon } from "@heroicons/react/solid";
 import addtoBasket from "../../redux/actions/addtoBasket";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import addtoBasketandDb from "../../redux/actions/addtoBasketandDb";
+import modifyBasketandDb from "../../redux/actions/modifyBasketandb";
 const minRating = 1;
 const maxRating = 5;
 function Products(props) {
-  const { id, title, price, description, category, image } = props;
+  const { _id, id, title, price, description, category, image } = props;
   const [rating] = useState(
     Math.floor(Math.random() * (maxRating - minRating + 1)) + minRating
   );
   const dispatch = useDispatch();
-
+  const token = useSelector((state) => state.login.token);
+  const baskets = useSelector((state) => state.basket.baskets);
   const addProductToBasket = () => {
-    const product = { id, title, price, description, category, image, rating };
-    dispatch(addtoBasket(product));
+    const quantity = 1;
+    const product = {
+      _id,
+      productId: {
+        _id: id,
+        title,
+        price,
+        description,
+        category,
+        image,
+        rating,
+      },
+      quantity,
+    };
+    if (token === null) dispatch(addtoBasket(product));
+    else {
+      const ind = baskets.findIndex((item) => item.productId._id === id);
+      if (ind < 0) dispatch(addtoBasketandDb(token.token, id));
+      else
+        dispatch(
+          modifyBasketandDb(
+            token.token,
+            baskets[ind]._id,
+            baskets[ind].quantity + 1
+          )
+        );
+    }
   };
 
   return (

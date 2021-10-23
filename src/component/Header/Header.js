@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SearchIcon,
   ShoppingCartIcon,
   MenuIcon,
 } from "@heroicons/react/outline";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import fetchCart from "../../redux/actions/fetchCart";
 const Header = () => {
+  const dispatch = useDispatch();
+  const tok = useSelector((state) => state.login.token);
+  const [username, setUserName] = useState("");
+  let baskets = useSelector((state) => state.basket.baskets);
+  useEffect(() => {
+    if (tok != null) {
+      dispatch(fetchCart(tok.token));
+      setUserName(tok.firstname);
+    }
+  }, [tok, dispatch]);
+  const cart = baskets.reduce((cart, item) => cart + item.quantity, 0);
+
   const history = useHistory();
-  const basketCount = useSelector((state) => state.basket.baskets.length);
-  const username = useSelector((state) => state.login.token.firstname);
   const requestHandler = (e) => {
     if (username == null) {
       history.push("/login");
@@ -17,6 +28,7 @@ const Header = () => {
       history.push("/profile");
     }
   };
+
   return (
     <header className="sticky top-0 z-50">
       <div className="flex bg-pharmeasy_green items-center p-1 flex-grow py-4  ">
@@ -60,7 +72,7 @@ const Header = () => {
           >
             <ShoppingCartIcon className="h-8" />
             <span className="absolute top-0 -right-1 md:right-10 text-center w-5 -mt-1  h-4 bg-red-600 rounded-full text-white font-bold">
-              {basketCount}
+              {cart}
             </span>
             <p className="hidden md:inline-flex font-extrabold md:text-sm mt-2">
               Basket
