@@ -4,7 +4,7 @@ function modifyBasketandDb(token, _id, quantity) {
     const auth = { token: token, cartId: _id, quantity: quantity };
     dispatch({ type: "MODIFYING_BASKET_DB" });
     axios
-      .put("http://localhost:8000/cart", auth)
+      .put("https://api99pharmeasy.herokuapp.com/cart", auth)
       .then((res) =>
         dispatch({ type: "MODIFIED_BASKET_DB", payload: res.data })
       )

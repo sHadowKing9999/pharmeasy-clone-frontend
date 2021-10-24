@@ -5,7 +5,7 @@ function login(username, password) {
     dispatch({ type: "LOGGING_IN" });
 
     axios
-      .post("http://localhost:8000/users/signin", auth)
+      .post("https://api99pharmeasy.herokuapp.com/users/signin", auth)
       .then((res) => dispatch({ type: "LOGIN_SUCCESS", payload: res.data }))
       .catch((err) => {
         console.log(err);
