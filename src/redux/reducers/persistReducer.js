@@ -6,7 +6,7 @@ import basketReducer from "./basketReducer";
 import feedReducer from "./feedReducer";
 import loginReducer from "./loginReducer";
 import signupReducer from "./signupReducer";
-
+import navbarReducer from "./navbarReducer";
 const rootPersistConfig = {
   key: "root",
   storage: storage,
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   login: persistReducer(authPersistConfig, loginReducer),
   feed: feedReducer,
   basket: basketReducer,
+  navbar: navbarReducer,
   signup: signupReducer,
 });
 

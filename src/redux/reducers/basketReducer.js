@@ -60,6 +60,10 @@ function basketReducer(
       return { ...state, loading: false, error: action.payload };
     case "DELETING_BASKET_DB_FAILED":
       return { ...state, loading: false, error: action.payload };
+    case "LOGGING_OUT":
+      return { ...state, loading: true };
+    case "LOG_OUT_SUCCESS":
+      return { ...state, loading: false, baskets: [] };
     default:
       return state;
   }
