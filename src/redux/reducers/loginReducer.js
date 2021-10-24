@@ -1,6 +1,6 @@
 function loginReducer(
   state = {
-    token: { token: null, firstname: null },
+    token: null,
     isLoading: false,
     error: null,
   },

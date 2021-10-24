@@ -10,7 +10,7 @@ import fetchCart from "../../redux/actions/fetchCart";
 const Header = () => {
   const dispatch = useDispatch();
   const tok = useSelector((state) => state.login.token);
-  const [username, setUserName] = useState("");
+  const [username, setUserName] = useState(null);
   let baskets = useSelector((state) => state.basket.baskets);
   useEffect(() => {
     if (tok != null) {

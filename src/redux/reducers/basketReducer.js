@@ -1,5 +1,5 @@
 function basketReducer(
-  state = { baskets: [], error: null, loading: true },
+  state = { baskets: [], error: null, loading: false },
   action
 ) {
   switch (action.type) {
@@ -17,9 +17,9 @@ function basketReducer(
           error: null,
         };
       else {
+        console.warn("not found ", action.payload.productId._id);
         let newbasket = [...state.baskets];
-        newbasket[ind].productId.quantity =
-          state.baskets[ind].productId.quantity + 1;
+        newbasket[ind].quantity = state.baskets[ind].quantity + 1;
         return { ...state, loading: false, baskets: newbasket, error: null };
       }
     case "REMOVING_FROM_BASKET":
@@ -30,10 +30,8 @@ function basketReducer(
       );
       let newbasket = [...state.baskets];
       if (index >= 0) {
-        newbasket[index].productId.quantity =
-          state.baskets[index].productId.quantity - 1;
-        if (newbasket[index].productId.quantity === 0)
-          newbasket.splice(index, 1);
+        newbasket[index].quantity = state.baskets[index].quantity - 1;
+        if (newbasket[index].quantity === 0) newbasket.splice(index, 1);
       } else {
         console.warn("item not found");
       }
