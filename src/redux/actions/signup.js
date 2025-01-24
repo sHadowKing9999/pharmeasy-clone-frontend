@@ -10,7 +10,7 @@ function signup(username, firstname, lastname, password) {
     dispatch({ type: "SIGNING_UP" });
 
     axios
-      .post("https://api99pharmeasy.herokuapp.com/users/signup", auth)
+      .post("https://localhost:3001/users/signup", auth)
       .then((res) => dispatch({ type: "SIGNUP_SUCCESS", payload: res.data }))
       .catch((err) => {
         console.log(err);
