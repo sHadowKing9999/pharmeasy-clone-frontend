@@ -4,7 +4,7 @@ function addtoBasketandDb(token, productId) {
     const auth = { token: token, productId: productId, quantity: 1 };
     dispatch({ type: "ADDING_TO_BASKET_DB" });
     axios
-      .post("https://api99pharmeasy.herokuapp.com/cart", auth)
+      .post("https://localhost:3001/cart", auth)
       .then((res) =>
         dispatch({ type: "ADDED_TO_BASKET_DB", payload: res.data })
       )

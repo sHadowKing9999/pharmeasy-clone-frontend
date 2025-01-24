@@ -4,7 +4,7 @@ function deleteFromBasketDb(token, _id) {
     const auth = { token: token, cartId: _id };
     dispatch({ type: "DELETING_BASKET_DB" });
     axios
-      .delete("https://api99pharmeasy.herokuapp.com/cart", { data: auth })
+      .delete("https://localhost:3001/cart", { data: auth })
       .then((res) => dispatch({ type: "DELETED_BASKET_DB", payload: res.data }))
       .catch((err) =>
         dispatch({ type: "DELETING_BASKET_DB_FAILED", payload: err.message })

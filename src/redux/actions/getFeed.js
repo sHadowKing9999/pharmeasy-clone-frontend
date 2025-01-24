@@ -3,7 +3,7 @@ function getFeed() {
   return function fetch(dispatch) {
     dispatch({ type: "POSTS_FETCH_REQ" });
     axios
-      .get("https://api99pharmeasy.herokuapp.com/products")
+      .get("https://localhost:3001/products")
       .then((res) =>
         dispatch({ type: "POSTS_FETCH_SUCCESS", payload: res.data })
       )
